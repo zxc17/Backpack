@@ -59,10 +59,10 @@ public class Backpack {
     }
 
     /**
-     * Метод выбирает из полученного списка предметы,
-     * которые помещаются в рюкзак (ограничение по весу)
-     * и имеют наибольшую стоимость.
-     * Результат помещается в поле items.
+     * Загрузка рюкзака.
+     * Метод выбирает из полученного списка предметы, которые помещаются в рюкзак
+     * (ограничение по весу) и имеют наибольшую стоимость.
+     * Результат сохраняется в поле items.
      *
      * @param newItems Список предметов для заполнения рюкзака.
      */
@@ -113,4 +113,29 @@ public class Backpack {
         }
         items = prevPartialLoad.get(capacity).items;
     }
+
+    public static class Item {
+        private final String NEGATIVE_VALUES = "Значения должны быть больше нуля. weight=%d, cost=%d";
+        String name;
+        int weight;
+        int cost;
+
+        public Item(String name, int weight, int cost) {
+            if (weight <= 0 || cost <= 0)
+                throw new IllegalArgumentException(String.format(NEGATIVE_VALUES, weight, cost));
+            this.name = name;
+            this.weight = weight;
+            this.cost = cost;
+        }
+
+        @Override
+        public String toString() {
+            return "Item{" +
+                    "name='" + name + '\'' +
+                    ", weight=" + weight +
+                    ", cost=" + cost +
+                    '}';
+        }
+    }
+
 }
